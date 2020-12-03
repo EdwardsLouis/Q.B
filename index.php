@@ -1,3 +1,15 @@
+<?php
+    $servidor="localhost";
+    $usuario="id15474894_qb";
+    $clave="Z1e7f8|TB==J^99<";
+    $baseDeDatos="id15474894_qbb";
+
+    $enlace = mysqli_connect($servidor, $usuario, $clave, $baseDeDatos);
+
+    if(!$enlace){
+        echo"Error en la conexion con el servidor";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -227,10 +239,6 @@
                 </ul>
             </div>
         </section>
-        <!-- Team-->
-
-        <!-- Clients-->
- 
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -238,25 +246,25 @@
                     <h2 class="section-heading text-uppercase">Contactanos</h2>
                     <h3 class="section-subheading text-muted">Envianos un mensaje para saber mas de nuestros servicios.</h3>
                 </div>
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form id="contactForm" name="sentMessage" novalidate="novalidate" method="POST">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="name" type="text" placeholder="Nombre *" required="required" data-validation-required-message="Please enter your name." />
+                                <input class="form-control" name ="name" type="text" placeholder="Nombre *" required="required" data-validation-required-message="Please enter your name." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="email" type="email" placeholder="Correo *" required="required" data-validation-required-message="Please enter your email address." />
+                                <input class="form-control" name="email" type="email" placeholder="Correo *" required="required" data-validation-required-message="Please enter your email address." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="phone" type="tel" placeholder="Telefono *" required="required" data-validation-required-message="Please enter your phone number." />
+                                <input class="form-control" name ="phone" type="tel" placeholder="Telefono *" required="required" data-validation-required-message="Please enter your phone number." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="message" placeholder="Mensaje *" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" name ="message" placeholder="Mensaje *" required="required" data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -449,3 +457,24 @@
         <script src="js/scripts.js"></script>
     </body>
 </html>
+
+<?php
+if(ssss($_POST['registrarse'])){
+    $name=$_POST["name"];
+    $email=$_POST["email"];
+    $phone =$_POST["phone"];
+    $message=$_POST["message"];
+    
+
+    $insertarDatos = "INSERT INTO qb VALUES(
+                                                                                                '$name',
+                                                                                                '$email',
+                                                                                                '$phone',
+                                                                                                '$message')";
+    $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+
+    if(!$ejecutarInsertar){
+        echo"Error En la linea de sql";
+    }
+}
+?>
